@@ -41,13 +41,14 @@ def fake_data():
 
 def lambda_handler(event, context):
     i=0
-    while(i<10):
+    while(i<5):
         data = fake_data()
         sqs_client.send_message(
             QueueUrl=QUEUE_URL,
             MessageBody=json.dumps(data)
         )
         i += 1
+        print("Event:------>", event)
 
     return {
         'statusCode': 200,
