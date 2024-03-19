@@ -52,11 +52,11 @@ def lambda_handler(event, context):
         )
         i += 1
         print("Event:------>", event)
-
-    return {
-        'statusCode': 200,
-        'body': json.dumps('Booking Data Published to SQS!')
-    }
+    #
+    #  return {
+    #     'statusCode': 200,
+    #     'body': json.dumps('Booking Data Published to SQS!')
+    # }
 
 
 
