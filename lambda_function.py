@@ -40,14 +40,14 @@ def fake_data(x):
             "price": randint(107, 700)
         }
         print(data_format)
-        
-data = fake_data(10)
-def lambda_handler(event, context):
 
-    sqs_client.send_message(
-        QueueUrl=QUEUE_URL,
-        MessageBody=json.dumps(data)
-    )
+def lambda_handler(event, context):
+    data = fake_data(10)
+    for item in data:
+        sqs_client.send_message(
+            QueueUrl=QUEUE_URL,
+            MessageBody=json.dumps(item)
+        )
     return {
         'statusCode': 200,
         'body': json.dumps('Sales order data published to SQS!')
