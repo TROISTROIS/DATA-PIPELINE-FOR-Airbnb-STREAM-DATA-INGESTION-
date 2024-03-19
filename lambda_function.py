@@ -39,14 +39,11 @@ def fake_data(x):
             "endDate": end_date,
             "price": randint(107, 700)
         }
-
-    return data_format
-
-
+        print(data_format)
+        
+data = fake_data(10)
 def lambda_handler(event, context):
 
-    data = fake_data(10)
-    print(data)
     sqs_client.send_message(
         QueueUrl=QUEUE_URL,
         MessageBody=json.dumps(data)
