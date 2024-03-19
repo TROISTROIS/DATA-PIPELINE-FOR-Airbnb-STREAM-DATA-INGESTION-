@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt -t lib
+  build:
+    commands:
+      - echo "Zipping deployment package..."
+      - cd lib
+      - zip -r9 ../deployment_package.zip .
+      - cd ..
+      - zip -g deployment_package.zip lambda_function.py
+  post_build:
+    commands:
+      - echo "Uploading Build Package to S3..."
+      - aws s3 cp deployment_package.zip s3://airbnb-s3-booking-records
+      - echo "Invoking Lambda function "
+      - aws lambda invoke --function-name airbnb-booking-data-producer-lambda --payload '{}'
+      - aws sqs send-message --queue-url https://sqs.us-east-1.amazonaws.com/590183810146/airbnb-booking-queue --message-body " "
+      - echo "Deployment complete!"
