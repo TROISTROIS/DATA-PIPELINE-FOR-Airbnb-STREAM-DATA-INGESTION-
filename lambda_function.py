@@ -29,6 +29,8 @@ def fake_data():
     if end_datetime > start_datetime:
         end_date = end_datetime.strftime('%Y-%m-%d')
 
+    booking_duration = (end_datetime - start_datetime).days
+
     return {
         "bookingId": str(uuid.uuid4())[:8],
         "userId": str(uuid.uuid4())[:8],
@@ -36,6 +38,7 @@ def fake_data():
         "location": f"{fake.city()}, {fake.country()}",
         "startDate": start_date,
         "endDate": end_date,
+        "bookingDuration": booking_duration,
         "price": randint(107, 700)
     }
 
@@ -54,7 +57,6 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Booking Data Published to SQS!')
     }
-
 
 
 
