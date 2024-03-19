@@ -41,7 +41,7 @@ def fake_data(x):
         }
         print(data_format)
 
-data = fake_data(10) 
+data = fake_data(10)
 def lambda_handler(event, context):
     for item in data:
         sqs_client.send_message(
@@ -50,7 +50,7 @@ def lambda_handler(event, context):
         )
     return {
         'statusCode': 200,
-        'body': json.dumps('Sales order data published to SQS!')
+        'body': json.dumps('Booking Data Published to SQS!')
     }
 
 
