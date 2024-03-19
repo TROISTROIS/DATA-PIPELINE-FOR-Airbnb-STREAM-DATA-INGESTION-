@@ -43,6 +43,7 @@ def fake_data(x):
 
 data = fake_data(10)
 def lambda_handler(event, context):
+    print("Event ---------------->", event)
     for item in data:
         sqs_client.send_message(
             QueueUrl=QUEUE_URL,
