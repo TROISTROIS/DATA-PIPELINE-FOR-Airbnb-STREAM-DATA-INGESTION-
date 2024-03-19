@@ -18,6 +18,8 @@ phases:
     commands:
       - echo "Uploading Build Package to S3..."
       - aws s3 cp deployment_package.zip s3://airbnb-s3-booking-records
+      - echo "Updating Lambda function"
+      - aws lambda update-function-code --function-name airbnb-booking-data-producer-lambda --s3-bucket airbnb-s3-booking-records --s3-key deployment_package.zip
       - echo "Invoking Lambda function "
       - aws lambda invoke --function-name airbnb-booking-data-producer-lambda --payload '{}' response.json
       - MESSAGE=$(cat response.json)
