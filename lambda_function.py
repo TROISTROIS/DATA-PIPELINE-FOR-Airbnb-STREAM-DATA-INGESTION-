@@ -30,8 +30,8 @@ def fake_data():
         end_date = end_datetime.strftime('%Y-%m-%d')
 
     return {
-        "bookingId": str(uuid.uuid4())[:10],
-        "userId": str(uuid.uuid4())[:10],
+        "bookingId": str(uuid.uuid4())[:8],
+        "userId": str(uuid.uuid4())[:8],
         "propertyId": str(uuid.uuid4())[:15],
         "location": f"{fake.city()}, {fake.country()}",
         "startDate": start_date,
