@@ -28,11 +28,11 @@ phases:
       - echo "Updating Lambda function"
       - aws lambda update-function-code --function-name airbnb-booking-data-producer-lambda --s3-bucket airbnb-s3-booking-records --s3-key deployment_package1.zip
       - echo "Invoking Lambda function "
-      - aws lambda invoke --function-name airbnb-booking-data-producer-lambda --payload '{}'
-      - aws sqs receive-message --queue-url "https://sqs.us-east-1.amazonaws.com/590183810146/airbnb-booking-queue" > output.json
+      - aws lambda invoke --function-name airbnb-booking-data-producer-lambda --payload '{"key1": "value1","key2": "value2","key3": "value3"}'
+      - aws sqs receive-message --queue-url https://sqs.us-east-1.amazonaws.com/590183810146/airbnb-booking-queue > output.json
       - aws events put-events --entries file://output.json
       - echo "Updating Lambda function"
       - aws lambda update-function-code --function-name airbnb-processed-filtered-bookings --s3-bucket airbnb-s3-booking-records --s3-key deployment_package2.zip
       - echo "Invoking Lambda function "
-      - aws lambda invoke --function-name airbnb-booking-data-producer-lambda --payload '{"key1": "value1","key2": "value2","key3": "value3"}'
+      - aws lambda invoke --function-name airbnb-processed-filtered-bookings --payload '{"key1": "value1","key2": "value2","key3": "value3"}'
       - echo "Deployment complete!"
