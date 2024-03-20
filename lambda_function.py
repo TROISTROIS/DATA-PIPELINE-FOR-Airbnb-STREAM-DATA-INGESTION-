@@ -45,7 +45,7 @@ def fake_data():
 
 def lambda_handler(event, context):
     i = 0
-    while (i < 15):
+    while (i < 200):
         bookings = fake_data()
         print(bookings)
         sqs_client.send_message(
