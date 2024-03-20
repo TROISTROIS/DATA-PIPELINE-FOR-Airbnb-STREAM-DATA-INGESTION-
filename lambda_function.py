@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 
 
 sqs_client = boto3.client('sqs')
+s3_client = boto3.client('s3')
 QUEUE_URL = 'https://sqs.us-east-1.amazonaws.com/590183810146/airbnb-booking-queue'
 fake = Faker()
 def fake_data():
@@ -43,20 +44,20 @@ def fake_data():
     }
 
 def lambda_handler(event, context):
-    i=0
-    while(i<5):
-        data = fake_data()
+    i = 0
+    while (i < 15):
+        bookings = fake_data()
+        print(bookings)
         sqs_client.send_message(
             QueueUrl=QUEUE_URL,
-            MessageBody=json.dumps(data)
+            MessageBody=json.dumps(bookings)
         )
         i += 1
-        print("Event:------>", event)
-    #
-    #  return {
-    #     'statusCode': 200,
-    #     'body': json.dumps('Booking Data Published to SQS!')
-    # }
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Booking Data Published to SQS!')
+    }
 
 
 
