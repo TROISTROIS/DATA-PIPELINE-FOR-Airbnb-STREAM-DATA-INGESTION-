@@ -28,8 +28,8 @@ phases:
       - echo "Updating Lambda function"
       - aws lambda update-function-code --function-name airbnb-booking-data-producer-lambda --s3-bucket airbnb-s3-booking-records --s3-key deployment_package1.zip
       - echo "Invoking Lambda function"
-      - aws lambda invoke --function-name airbnb-booking-data-producer-lambda payload '{"key1"}'
+      - aws lambda invoke --function-name airbnb-booking-data-producer-lambda payload '{ }' output.json
       - echo "Updating Lambda Function "
       - aws lambda update-function-code --function-name airbnb-processed-filtered-bookings --s3-bucket airbnb-s3-booking-records --s3-key deployment_package2.zip
-      - aws lambda invoke --function-name airbnb-processed-filtered-bookings payload '{"key1"}'
+      - aws lambda invoke --function-name airbnb-processed-filtered-bookings payload '{ }' output.json
       - echo "Deployment complete!"
