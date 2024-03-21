@@ -32,4 +32,4 @@ phases:
       - echo "Updating Lambda Function "
       - aws lambda update-function-code --function-name airbnb-processed-filtered-bookings --s3-bucket airbnb-s3-booking-records --s3-key deployment_package2.zip
       - aws lambda invoke --function-name airbnb-processed-filtered-bookings --payload '{}' output.json
-      - echo "Deployment complete!"
+      - echo "Deployment complete!" 
